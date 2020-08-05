@@ -17,7 +17,26 @@ class Dogs
 
     def self.find_by_breed(name)
         self.all.select{|dog| dog.name.downcase.include?(name.downcase)}
+
     end
 
 
 end
+
+def ascii
+         puts "                    |\_/|                  
+                    | @ @   Woof! 
+                    |   <>              _  
+                    |  _/\------____ ((| |))
+                    |               `--' |   
+                ____|_       ___|   |___.' 
+               /_/_____/____/_______|".colorize(:light_black)
+     end
+
+     def ascii2
+        puts "                     .--~~,__
+        :-....,-------`~~'._.'
+         `-,,,  ,_      ;'~U'
+          _,-' ,'`-__; '--.
+         (_/'~~      ''''(;".colorize(:yellow)
+    end

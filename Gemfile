@@ -1,1 +1,7 @@
-require Gem "colorize"
+source 'https://rubygems.org'
+
+gem "pry"
+
+gem "colorize"
+
+gem "rainbow"

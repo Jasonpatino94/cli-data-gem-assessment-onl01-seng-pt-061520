@@ -1,11 +1,16 @@
-require 'pry'
+
 class CLI
    
     def run
       @api = API.new
       @api.dog_breeds
       system("clear")
-       puts "LETS LEARN ABOUT SPECIFIC DOG BREEDS!!"
+      
+       puts "LETS LEARN ABOUT SPECIFIC DOG BREEDS!!".colorize(:yellow)
+       puts "\n"
+
+       ascii 
+
        puts "\n"
        menu
     end
@@ -18,10 +23,12 @@ class CLI
          if input == "1" 
             all_dog_breeds
          elsif input == "2"
+            ascii2
            goodbye
          else
+            puts "Invalid Input. Try again".colorize(:red)
+            sleep(1.0)
             run
-            puts "Invalid Input. Try again"
          end
      end
 
@@ -36,8 +43,20 @@ class CLI
 
 
      def breed_selection(breed)
+      system("printf '\33c\e[3J'")
       pups = Dogs.find_by_breed(breed)
-      pups.map{|pup| puts pup.name}
+      if pups.length == 0 
+         puts "Try again"
+      end
+      pups.each_with_index do |pup , index|
+         puts "\n"
+         puts "#{index + 1}) Name: #{pup.name}".colorize(:blue)
+         puts "Life expectancy: #{pup.life_span}".colorize(:green)
+         puts "Temperament: #{pup.temperament}".colorize(:green)
+         puts "Bred For: #{pup.bred_for}".colorize(:green)
+         puts "\n"
+      end
+
       menu
      end
       
@@ -45,6 +64,6 @@ class CLI
 
 
      def goodbye
-        puts "Alright, Goodbye!"
+        puts "Alright, Goodbye! WOOF WOOF".colorize(:red)
      end
 end

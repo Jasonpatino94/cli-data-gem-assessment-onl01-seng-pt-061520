@@ -6,13 +6,3 @@ require_relative "../config/environment.rb"
 
 CLI.new.run
 
-# api = API.new
-# names = api.dog_breeds
-# puts names
-
-# puts "\n"
-
-
-# print "What breed?"
-# user_input = gets.chomp
-# api.specific_breed(user_input)
