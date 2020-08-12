@@ -36,25 +36,43 @@ class CLI
          Dogs.all.each_with_index do |dog, index|
             puts "#{index + 1}. #{dog.name}"
          end
-         print "what breed would you like to know more about?"
+         print "what breed would you like to know more about? Type breed name or number."
          input = gets.chomp.downcase
          breed_selection(input)
      end
 
 
-     def breed_selection(breed)
+     def breed_selection(input)
       system("printf '\33c\e[3J'")
-      pups = Dogs.find_by_breed(breed)
-      if pups.length == 0 
-         puts "Try again"
-      end
-      pups.each_with_index do |pup , index|
+
+      if input.to_i > 0 && input.to_i < 173
+         dog = Dogs.all[input.to_i - 1]
+         if dog.length == 0 
+            puts "try again"
+         end
+            
          puts "\n"
-         puts "#{index + 1}) Name: #{pup.name}".colorize(:blue)
-         puts "Life expectancy: #{pup.life_span}".colorize(:green)
-         puts "Temperament: #{pup.temperament}".colorize(:green)
-         puts "Bred For: #{pup.bred_for}".colorize(:green)
-         puts "\n"
+                  puts "1) Name: #{dog.name}".colorize(:blue)
+                  puts "Life expectancy: #{dog.life_span}".colorize(:green)
+                  puts "Temperament: #{dog.temperament}".colorize(:green)
+                  puts "Bred For: #{dog.bred_for}".colorize(:green)
+                  puts "\n"
+
+         # print out dog and dog details using index (BUT HOW?!)
+
+      else input.to_i == 0
+         pups = Dogs.find_by_breed(input) 
+            if pups.length == 0 
+                puts "Try again"
+            end
+               pups.each_with_index do |pup , index|
+                  puts "\n"
+                  puts "#{index + 1}) Name: #{pup.name}".colorize(:blue)
+                  puts "Life expectancy: #{pup.life_span}".colorize(:green)
+                  puts "Temperament: #{pup.temperament}".colorize(:green)
+                  puts "Bred For: #{pup.bred_for}".colorize(:green)
+                  puts "\n"
+               end
       end
 
       menu
