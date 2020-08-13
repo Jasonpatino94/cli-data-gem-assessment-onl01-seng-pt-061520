@@ -36,7 +36,7 @@ class CLI
          Dogs.all.each_with_index do |dog, index|
             puts "#{index + 1}. #{dog.name}"
          end
-         print "what breed would you like to know more about? Type breed name or number."
+         print "what breed would you like to know more about? Type breed name or number(1-172)."
          input = gets.chomp.downcase
          breed_selection(input)
      end
@@ -45,20 +45,19 @@ class CLI
      def breed_selection(input)
       system("printf '\33c\e[3J'")
 
-      if input.to_i > 0 && input.to_i < 173
-         dog = Dogs.all[input.to_i - 1]
-         if dog.length == 0 
-            puts "try again"
-         end
-            
-         puts "\n"
-                  puts "1) Name: #{dog.name}".colorize(:blue)
-                  puts "Life expectancy: #{dog.life_span}".colorize(:green)
-                  puts "Temperament: #{dog.temperament}".colorize(:green)
-                  puts "Bred For: #{dog.bred_for}".colorize(:green)
-                  puts "\n"
+      if input.to_i > 0 
+         dog = Dogs.all[input.to_i - 1] 
+            if dog == nil
+               puts "Try again"
+            else   
+               puts "\n"
+               puts "1) Name: #{dog.name}".colorize(:blue)
+               puts "Life expectancy: #{dog.life_span}".colorize(:green)
+               puts "Temperament: #{dog.temperament}".colorize(:green)
+               puts "Bred For: #{dog.bred_for}".colorize(:green)
+               puts "\n"
+            end
 
-         # print out dog and dog details using index (BUT HOW?!)
 
       else input.to_i == 0
          pups = Dogs.find_by_breed(input) 
